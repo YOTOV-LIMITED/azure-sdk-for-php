@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Azure-sdk-for-php by YOTOV-LIMITED</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Azure-sdk-for-php</h1>
+      <h2 class="project-tagline">Microsoft Azure SDK for PHP</h2>
+      <a href="https://github.com/YOTOV-LIMITED/azure-sdk-for-php" class="btn">View on GitHub</a>
+      <a href="https://github.com/YOTOV-LIMITED/azure-sdk-for-php/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/YOTOV-LIMITED/azure-sdk-for-php/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="microsoft-azure-sdk-for-php" class="anchor" href="#microsoft-azure-sdk-for-php" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Microsoft Azure SDK for PHP</h1>
+
+<p>This project provides a set of PHP client libraries that make it easy to access
+Microsoft Azure tables, blobs, queues, service bus (queues and topics), service runtime and service management APIs. For documentation on how to host PHP applications on Microsoft Azure, please see the
+<a href="http://www.windowsazure.com/en-us/develop/php/">Microsoft Azure PHP Developer Center</a>.</p>
+
+<h1>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h1>
+
+<ul>
+<li>Tables
+
+<ul>
+<li>create and delete tables</li>
+<li>create, query, insert, update, merge, and delete entities</li>
+<li>batch operations</li>
+<li>REST API Version: see <a href="https://github.com/Azure/azure-storage-php">https://github.com/Azure/azure-storage-php</a>
+</li>
+</ul>
+</li>
+<li>Blobs
+
+<ul>
+<li>create, list, and delete containers, work with container metadata and permissions, list blobs in container</li>
+<li>create block and page blobs (from a stream or a string), work with blob blocks and pages, delete blobs</li>
+<li>work with blob properties, metadata, leases, snapshot a blob</li>
+<li>REST API Version: see <a href="https://github.com/Azure/azure-storage-php">https://github.com/Azure/azure-storage-php</a>
+</li>
+</ul>
+</li>
+<li>Storage Queues
+
+<ul>
+<li>create, list, and delete queues, and work with queue metadata and properties</li>
+<li>create, get, peek, update, delete messages</li>
+<li>REST API Version: see <a href="https://github.com/Azure/azure-storage-php">https://github.com/Azure/azure-storage-php</a>
+</li>
+</ul>
+</li>
+<li>Service Bus
+
+<ul>
+<li>Queues: create, list and delete queues; send, receive, unlock and delete messages</li>
+<li>Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules</li>
+</ul>
+</li>
+<li>Service Runtime
+
+<ul>
+<li>discover addresses and ports for the endpoints of other role instances in your service</li>
+<li>get configuration settings and access local resources</li>
+<li>get role instance information for current role and other role instances</li>
+<li>query and set the status of the current role</li>
+<li>REST API Version: 2011-03-08</li>
+</ul>
+</li>
+<li>Service Management
+
+<ul>
+<li>storage accounts: create, update, delete, list, regenerate keys</li>
+<li>affinity groups: create, update, delete, list, get properties</li>
+<li>locations: list</li>
+<li>hosted services: create, update, delete, list, get properties</li>
+<li>deployment: create, get, delete, swap, change configuration, update status, upgrade, rollback</li>
+<li>role instance: reboot, reimage</li>
+<li>REST API Version: 2011-10-01</li>
+</ul>
+</li>
+<li>Media Services 
+
+<ul>
+<li>Connection</li>
+<li>Ingest asset, upload files</li>
+<li>Encoding / process asset, create job, job templates</li>
+<li>Manage media services entities: create / update / read / delete / get list</li>
+<li>Delivery SAS and Streaming media content</li>
+<li>Dynamic encryption: AES and DRM (PlayReady/Widevine/FairPlay) with and without Token restriction</li>
+<li>Scale encoding reserved unit type</li>
+<li>REST API Version: 2.12</li>
+</ul>
+</li>
+</ul>
+
+<h1>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h1>
+
+<h2>
+<a id="download-source-code" class="anchor" href="#download-source-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Download Source Code</h2>
+
+<p>To get the source code from GitHub, type</p>
+
+<pre><code>git clone https://github.com/Azure/azure-sdk-for-php.git
+cd ./azure-sdk-for-php
+</code></pre>
+
+<blockquote>
+<p><strong>Note</strong></p>
+
+<p>The PHP Client Libraries for Microsoft Azure have a dependency on the <a href="http://pear.php.net/package/HTTP_Request2">HTTP_Request2</a>, <a href="http://pear.php.net/package/Mail_mime">Mail_mime</a>, and <a href="http://pear.php.net/package/Mail_mimeDecode">Mail_mimeDecode</a> PEAR packages. The recommended way to resolve these dependencies is to install them using the <a href="http://getcomposer.org">Composer package manager</a>.</p>
+</blockquote>
+
+<h2>
+<a id="install-via-composer" class="anchor" href="#install-via-composer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install via Composer</h2>
+
+<ul>
+<li>Create a file named <strong>composer.json</strong> in the root of your project and add the following code to it:</li>
+</ul>
+
+<div class="highlight highlight-source-json"><pre>    {
+        <span class="pl-s"><span class="pl-pds">"</span>require<span class="pl-pds">"</span></span>: {        
+            <span class="pl-s"><span class="pl-pds">"</span>microsoft/windowsazure<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>^0.4<span class="pl-pds">"</span></span>
+        }  
+    }</pre></div>
+
+<ul>
+<li><p>Download <strong><a href="http://getcomposer.org/composer.phar">composer.phar</a></strong> in your project root.</p></li>
+<li>
+<p>Open a command prompt and execute this in your project root</p>
+
+<p>php composer.phar install</p>
+
+<blockquote>
+<p><strong>Note</strong></p>
+
+<p>On Windows, you will also need to add the Git executable to your PATH environment variable.</p>
+</blockquote>
+</li>
+</ul>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
+
+<h2>
+<a id="getting-started-1" class="anchor" href="#getting-started-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>There are four basic steps that have to be performed before you can make a call to any Microsoft Azure API when using the libraries. </p>
+
+<ul>
+<li>
+<p>First, include the autoloader script:</p>
+
+<p>require_once "vendor/autoload.php"; </p>
+</li>
+<li>
+<p>Include the namespaces you are going to use.</p>
+
+<p>To create any Microsoft Azure service client you need to use the <strong>ServicesBuilder</strong> class:</p>
+
+<p>use WindowsAzure\Common\ServicesBuilder;</p>
+
+<p>To process exceptions you need:</p>
+
+<p>use WindowsAzure\Common\ServiceException;</p>
+</li>
+<li>
+<p>To instantiate the service client you will also need a valid connection string. The format is: </p>
+
+<ul>
+<li>
+<p>For accessing a live storage service (tables, blobs, queues):</p>
+
+<p>DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]</p>
+</li>
+<li>
+<p>For accessing the emulator storage:</p>
+
+<p>UseDevelopmentStorage=true</p>
+</li>
+<li>
+<p>For accessing the Service Bus:</p>
+
+<p>Endpoint=[yourEndpoint];SharedSecretIssuer=[yourWrapAuthenticationName];SharedSecretValue=[yourWrapPassword]</p>
+
+<p>Where the Endpoint is typically of the format <code>https://[yourNamespace].servicebus.windows.net</code>.</p>
+</li>
+<li>
+<p>For accessing Service Management APIs:</p>
+
+<p>SubscriptionID=[yourSubscriptionId];CertificatePath=[filePathToYourCertificate]</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Instantiate a "REST Proxy" - a wrapper around the available calls for the given service.</p>
+
+<ul>
+<li>
+<p>For the Storage services:</p>
+
+<p>$tableRestProxy = ServicesBuilder::getInstance()-&gt;createTableService($connectionString);
+$blobRestProxy = ServicesBuilder::getInstance()-&gt;createBlobService($connectionString);
+$queueRestProxy = ServicesBuilder::getInstance()-&gt;createQueueService($connectionString);</p>
+</li>
+<li>
+<p>For Service Bus:</p>
+
+<p>$serviceBusRestProxy = ServicesBuilder::getInstance()-&gt;createServiceBusService($connectionString);</p>
+</li>
+<li>
+<p>For Service Management:</p>
+
+<p>$serviceManagementRestProxy = ServicesBuilder::getInstance()-&gt;createServiceManagementService($connectionString);</p>
+</li>
+<li>
+<p>For Media Services:</p>
+
+<p>$mediaServicesRestProxy = ServicesBuilder-&gt;getInstance()-&gt;createMediaServicesService(new MediaServicesSettings([YourAccountName], [YourPrimaryOrSecondaryAccessKey]));</p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="table-storage" class="anchor" href="#table-storage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table Storage</h2>
+
+<p>The following are examples of common operations performed with the Table serivce. For more please read <a href="http://www.windowsazure.com/en-us/develop/php/how-to-guides/table-service/">How-to use the Table service</a>.</p>
+
+<h3>
+<a id="create-a-table" class="anchor" href="#create-a-table" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a table</h3>
+
+<p>To create a table call <strong>createTable</strong>:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Create table.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$tableRestProxy</span><span class="pl-k">-&gt;</span>createTable(<span class="pl-s"><span class="pl-pds">"</span>mytable<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windowsazure/dd179438.aspx">Error Codes and Messages for Tables</a></p>
+
+<h3>
+<a id="insert-an-entity" class="anchor" href="#insert-an-entity" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Insert an entity</h3>
+
+<p>To add an entity to a table, create a new <strong>Entity</strong> object and pass it to <strong>TableRestProxy-&gt;insertEntity</strong>. Note that when you create an entity you must specify a <code>PartitionKey</code> and <code>RowKey</code>. These are the unique identifiers for an entity and are values that can be queried much faster than other entity properties. The system uses <code>PartitionKey</code> to automatically distribute the table’s entities over many storage nodes.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">MicrosoftAzure\Storage\Table\Models\Entity</span>;</span>
+<span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">MicrosoftAzure\Storage\Table\Models\EdmType</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$entity</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Entity</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$entity</span><span class="pl-k">-&gt;</span>setPartitionKey(<span class="pl-s"><span class="pl-pds">"</span>pk<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$entity</span><span class="pl-k">-&gt;</span>setRowKey(<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$entity</span><span class="pl-k">-&gt;</span>addProperty(<span class="pl-s"><span class="pl-pds">"</span>PropertyName<span class="pl-pds">"</span></span>, <span class="pl-c1">EdmType</span><span class="pl-k">::</span><span class="pl-c1">STRING</span>, <span class="pl-s"><span class="pl-pds">"</span>Sample<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">try</span>{</span>
+<span class="pl-s1">  <span class="pl-smi">$tableRestProxy</span><span class="pl-k">-&gt;</span>insertEntity(<span class="pl-s"><span class="pl-pds">"</span>mytable<span class="pl-pds">"</span></span>, <span class="pl-smi">$entity</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h3>
+<a id="query-entities" class="anchor" href="#query-entities" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Query entities</h3>
+
+<p>To query for entities you can call <strong>queryEntities</strong>. The subset of entities you retrieve will be determined by the filter you use (for more information, see <a href="http://msdn.microsoft.com/en-us/library/windowsazure/dd894031.aspx">Querying Tables and Entities</a>). You can also provide no filter at all.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$filter</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>RowKey eq '2'<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$tableRestProxy</span><span class="pl-k">-&gt;</span>queryEntities(<span class="pl-s"><span class="pl-pds">"</span>mytable<span class="pl-pds">"</span></span>, <span class="pl-smi">$filter</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$entities</span> <span class="pl-k">=</span> <span class="pl-smi">$result</span><span class="pl-k">-&gt;</span>getEntities();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">foreach</span>(<span class="pl-smi">$entities</span> <span class="pl-k">as</span> <span class="pl-smi">$entity</span>){</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$entity</span><span class="pl-k">-&gt;</span>getPartitionKey()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>:<span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$entity</span><span class="pl-k">-&gt;</span>getRowKey()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h2>
+<a id="blob-storage" class="anchor" href="#blob-storage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Blob Storage</h2>
+
+<p>To get started using the Blob service you must include the <code>BlobService</code> and <code>BlobSettings</code> namespaces and set the <code>ACCOUNT_NAME</code> and <code>ACCOUNT_KEY</code> configuration settings for your credentials. Then you instantiate the wrapper using the <code>BlobService</code> factory.</p>
+
+<p>The following are examples of common operations performed with the Blob serivce. For more please read <a href="http://www.windowsazure.com/en-us/develop/php/how-to-guides/blob-service/">How-to use the Blob service</a>.</p>
+
+<h3>
+<a id="create-a-container" class="anchor" href="#create-a-container" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a container</h3>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c">// OPTIONAL: Set public access policy and metadata.</span></span>
+<span class="pl-s1"><span class="pl-c">// Create container options object.</span></span>
+<span class="pl-s1"><span class="pl-smi">$createContainerOptions</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">CreateContainerOptions</span>(); </span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Set public access policy. Possible values are </span></span>
+<span class="pl-s1"><span class="pl-c">// PublicAccessType::CONTAINER_AND_BLOBS and PublicAccessType::BLOBS_ONLY.</span></span>
+<span class="pl-s1"><span class="pl-c">// CONTAINER_AND_BLOBS: full public read access for container and blob data.</span></span>
+<span class="pl-s1"><span class="pl-c">// BLOBS_ONLY: public read access for blobs. Container data not available.</span></span>
+<span class="pl-s1"><span class="pl-c">// If this value is not specified, container data is private to the account owner.</span></span>
+<span class="pl-s1"><span class="pl-smi">$createContainerOptions</span><span class="pl-k">-&gt;</span>setPublicAccess(<span class="pl-c1">PublicAccessType</span><span class="pl-k">::</span><span class="pl-c1">CONTAINER_AND_BLOBS</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Set container metadata</span></span>
+<span class="pl-s1"><span class="pl-smi">$createContainerOptions</span><span class="pl-k">-&gt;</span>addMetaData(<span class="pl-s"><span class="pl-pds">"</span>key1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>value1<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$createContainerOptions</span><span class="pl-k">-&gt;</span>addMetaData(<span class="pl-s"><span class="pl-pds">"</span>key2<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>value2<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Create container.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$blobRestProxy</span><span class="pl-k">-&gt;</span>createContainer(<span class="pl-s"><span class="pl-pds">"</span>mycontainer<span class="pl-pds">"</span></span>, <span class="pl-smi">$createContainerOptions</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windowsazure/dd179439.aspx">Error Codes and Messages for Blobs</a></p>
+
+<p>For more information about container ACLs, see <a href="http://msdn.microsoft.com/en-us/library/windowsazure/dd179391.aspx">Set Container ACL (REST API)</a>.</p>
+
+<h3>
+<a id="upload-a-blob" class="anchor" href="#upload-a-blob" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Upload a blob</h3>
+
+<p>To upload a file as a blob, use the <strong>BlobRestProxy-&gt;createBlockBlob</strong> method. This operation will create the blob if it doesn’t exist, or overwrite it if it does. The code example below assumes that the container has already been created and uses <a href="http://www.php.net/fopen">fopen</a> to open the file as a stream.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$content</span> <span class="pl-k">=</span> <span class="pl-c1">fopen</span>(<span class="pl-s"><span class="pl-pds">"</span>myfile.txt<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>r<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$blob_name</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>myblob<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">//Upload blob</span></span>
+<span class="pl-s1">  <span class="pl-smi">$blobRestProxy</span><span class="pl-k">-&gt;</span>createBlockBlob(<span class="pl-s"><span class="pl-pds">"</span>mycontainer<span class="pl-pds">"</span></span>, <span class="pl-smi">$blob_name</span>, <span class="pl-smi">$content</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<p>While the example above uploads a blob as a stream, a blob can also be uploaded as a string.</p>
+
+<h3>
+<a id="list-blobs-in-a-container" class="anchor" href="#list-blobs-in-a-container" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List blobs in a container</h3>
+
+<p>To list the blobs in a container, use the <strong>BlobRestProxy-&gt;listBlobs</strong> method with a <strong>foreach</strong> loop to loop through the result. The following code outputs the name and URI of each blob in a container.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// List blobs.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$blob_list</span> <span class="pl-k">=</span> <span class="pl-smi">$blobRestProxy</span><span class="pl-k">-&gt;</span>listBlobs(<span class="pl-s"><span class="pl-pds">"</span>mycontainer<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1">  <span class="pl-smi">$blobs</span> <span class="pl-k">=</span> <span class="pl-smi">$blob_list</span><span class="pl-k">-&gt;</span>getBlobs();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-k">foreach</span>(<span class="pl-smi">$blobs</span> <span class="pl-k">as</span> <span class="pl-smi">$blob</span>)</span>
+<span class="pl-s1">  {</span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-smi">$blob</span><span class="pl-k">-&gt;</span>getName()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$blob</span><span class="pl-k">-&gt;</span>getUrl()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">  }</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h2>
+<a id="storage-queues" class="anchor" href="#storage-queues" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Storage Queues</h2>
+
+<p>To get started using the Queue service you must include the <code>QueueService</code> and <code>QueueSettings</code> namespaces and set the <code>ACCOUNT_NAME</code> and <code>ACCOUNT_KEY</code> configuration settings for your credentials. Then you instantiate the wrapper using the <code>QueueService</code> factory.</p>
+
+<p>The following are examples of common operations performed with the Queue serivce. For more please read <a href="http://www.windowsazure.com/en-us/develop/php/how-to-guides/queue-service/">How-to use the Queue service</a>.</p>
+
+<h3>
+<a id="create-a-queue" class="anchor" href="#create-a-queue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a queue</h3>
+
+<p>A <strong>QueueRestProxy</strong> object lets you create a queue with the <strong>createQueue</strong> method. When creating a queue, you can set options on the queue, but doing so is not required.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$createQueueOptions</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">CreateQueueOptions</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$createQueueOptions</span><span class="pl-k">-&gt;</span>addMetaData(<span class="pl-s"><span class="pl-pds">"</span>key1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>value1<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$createQueueOptions</span><span class="pl-k">-&gt;</span>addMetaData(<span class="pl-s"><span class="pl-pds">"</span>key2<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>value2<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Create queue.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$queueRestProxy</span><span class="pl-k">-&gt;</span>createQueue(<span class="pl-s"><span class="pl-pds">"</span>myqueue<span class="pl-pds">"</span></span>, <span class="pl-smi">$createQueueOptions</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windowsazure/dd179446.aspx">Error Codes and Messages for Queues</a></p>
+
+<h3>
+<a id="add-a-message-to-a-queue" class="anchor" href="#add-a-message-to-a-queue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Add a message to a queue</h3>
+
+<p>To add a message to a queue, use <strong>QueueRestProxy-&gt;createMessage</strong>. The method takes the queue name, the message text, and message options (which are optional).
+For compatibility with others you may need to base64 encode message.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Create message.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$msg</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Hello World!<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">  <span class="pl-c">// optional: $msg = base64_encode($msg);</span></span>
+<span class="pl-s1">  <span class="pl-smi">$queueRestProxy</span><span class="pl-k">-&gt;</span>createMessage(<span class="pl-s"><span class="pl-pds">"</span>myqueue<span class="pl-pds">"</span></span>, <span class="pl-smi">$msg</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h3>
+<a id="peek-at-the-next-message" class="anchor" href="#peek-at-the-next-message" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Peek at the next message</h3>
+
+<p>You can peek at a message (or messages) at the front of a queue without removing it from the queue by calling <strong>QueueRestProxy-&gt;peekMessages</strong>.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c">// OPTIONAL: Set peek message options.</span></span>
+<span class="pl-s1"><span class="pl-smi">$message_options</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">PeekMessagesOptions</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$message_options</span><span class="pl-k">-&gt;</span>setNumberOfMessages(<span class="pl-c1">1</span>); <span class="pl-c">// Default value is 1.</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-smi">$peekMessagesResult</span> <span class="pl-k">=</span> <span class="pl-smi">$queueRestProxy</span><span class="pl-k">-&gt;</span>peekMessages(<span class="pl-s"><span class="pl-pds">"</span>myqueue<span class="pl-pds">"</span></span>, <span class="pl-smi">$message_options</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$messages</span> <span class="pl-k">=</span> <span class="pl-smi">$peekMessagesResult</span><span class="pl-k">-&gt;</span>getQueueMessages();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// View messages.</span></span>
+<span class="pl-s1"><span class="pl-smi">$messageCount</span> <span class="pl-k">=</span> <span class="pl-c1">count</span>(<span class="pl-smi">$messages</span>);</span>
+<span class="pl-s1"><span class="pl-k">if</span>(<span class="pl-smi">$messageCount</span> <span class="pl-k">&lt;=</span> <span class="pl-c1">0</span>){</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>There are no messages.&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span>
+<span class="pl-s1"><span class="pl-k">else</span>{</span>
+<span class="pl-s1">  <span class="pl-k">foreach</span>(<span class="pl-smi">$messages</span> <span class="pl-k">as</span> <span class="pl-smi">$message</span>)  {</span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Peeked message:&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Message Id: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>getMessageId()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Date: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-c1">date_format</span>(<span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>getInsertionDate(), <span class="pl-s"><span class="pl-pds">'</span>Y-m-d<span class="pl-pds">'</span></span>)<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Message text: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>getMessageText()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">  }</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h3>
+<a id="de-queue-the-next-message" class="anchor" href="#de-queue-the-next-message" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>De-queue the next message</h3>
+
+<p>Your code removes a message from a queue in two steps. First, you call <strong>QueueRestProxy-&gt;listMessages</strong>, which makes the message invisible to any other code reading from the queue. By default, this message will stay invisible for 30 seconds (if the message is not deleted in this time period, it will become visible on the queue again). To finish removing the message from the queue, you must call <strong>QueueRestProxy-&gt;deleteMessage</strong>.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c">// Get message.</span></span>
+<span class="pl-s1"><span class="pl-smi">$listMessagesResult</span> <span class="pl-k">=</span> <span class="pl-smi">$queueRestProxy</span><span class="pl-k">-&gt;</span>listMessages(<span class="pl-s"><span class="pl-pds">"</span>myqueue<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$messages</span> <span class="pl-k">=</span> <span class="pl-smi">$listMessagesResult</span><span class="pl-k">-&gt;</span>getQueueMessages();</span>
+<span class="pl-s1"><span class="pl-smi">$message</span> <span class="pl-k">=</span> <span class="pl-smi">$messages</span>[<span class="pl-c1">0</span>];</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Process message</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Get message Id and pop receipt.</span></span>
+<span class="pl-s1"><span class="pl-smi">$messageId</span> <span class="pl-k">=</span> <span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>getMessageId();</span>
+<span class="pl-s1"><span class="pl-smi">$popReceipt</span> <span class="pl-k">=</span> <span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>getPopReceipt();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Delete message.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$queueRestProxy</span><span class="pl-k">-&gt;</span>deleteMessage(<span class="pl-s"><span class="pl-pds">"</span>myqueue<span class="pl-pds">"</span></span>, <span class="pl-smi">$messageId</span>, <span class="pl-smi">$popReceipt</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h2>
+<a id="service-bus-queues" class="anchor" href="#service-bus-queues" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Service Bus Queues</h2>
+
+<p>The current PHP Service Bus APIs only support ACS connection strings. You need to use PowerShell to create a new ACS Service Bus namespace at the present time.<br>
+First, make sure you have Azure PowerShell installed, then in a PowerShell command prompt, run </p>
+
+<pre><code>Add-AzureAccount # this will sign you in
+New-AzureSBNamespace -CreateACSNamespace $true -Name 'mytestbusname' -Location 'West US' -NamespaceType 'Messaging'
+</code></pre>
+
+<p>If it is sucessful, you will get the connection string in the PowerShell output. If you get connection errors with it and the conection string looks like Endpoint=sb://..., change it to <strong>Endpoint=https://...</strong></p>
+
+<h3>
+<a id="create-a-queue-1" class="anchor" href="#create-a-queue-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a Queue</h3>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-smi">$queueInfo</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">QueueInfo</span>(<span class="pl-s"><span class="pl-pds">"</span>myqueue<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-c">// Create queue.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$serviceBusRestProxy</span><span class="pl-k">-&gt;</span>createQueue(<span class="pl-smi">$queueInfo</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windowsazure/dd179357">Error Codes and Messages</a></p>
+
+<h3>
+<a id="send-a-message" class="anchor" href="#send-a-message" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Send a Message</h3>
+
+<p>To send a message to a Service Bus queue, your application will call the <strong>ServiceBusRestProxy-&gt;sendQueueMessage</strong> method. Messages sent to (and received from ) Service Bus queues are instances
+of the <strong>BrokeredMessage</strong> class.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Create message.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$message</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">BrokeredMessage</span>();</span>
+<span class="pl-s1">  <span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>setBody(<span class="pl-s"><span class="pl-pds">"</span>my message<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-c">// Send message.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$serviceBusRestProxy</span><span class="pl-k">-&gt;</span>sendQueueMessage(<span class="pl-s"><span class="pl-pds">"</span>myqueue<span class="pl-pds">"</span></span>, <span class="pl-smi">$message</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h3>
+<a id="receive-a-message" class="anchor" href="#receive-a-message" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Receive a Message</h3>
+
+<p>The primary way to receive messages from a queue is to use a <strong>ServiceBusRestProxy-&gt;receiveQueueMessage</strong> method. Messages can be received in two different modes: <strong>ReceiveAndDelete</strong> (mark message as consumed on read) and <strong>PeekLock</strong> (locks message for a period of time, but does not delete).</p>
+
+<p>The example below demonstrates how a message can be received and processed using <strong>PeekLock</strong> mode (not the default mode).</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Set the receive mode to PeekLock (default is ReceiveAndDelete).</span></span>
+<span class="pl-s1">  <span class="pl-smi">$options</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">ReceiveMessageOptions</span>();</span>
+<span class="pl-s1">  <span class="pl-smi">$options</span><span class="pl-k">-&gt;</span>setPeekLock(<span class="pl-c1">true</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-c">// Receive message.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$message</span> <span class="pl-k">=</span> <span class="pl-smi">$serviceBusRestProxy</span><span class="pl-k">-&gt;</span>receiveQueueMessage(<span class="pl-s"><span class="pl-pds">"</span>myqueue<span class="pl-pds">"</span></span>, <span class="pl-smi">$options</span>);</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Body: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>getBody()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>MessageID: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>getMessageId()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-c">// *** Process message here ***</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-c">// Delete message.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$serviceBusRestProxy</span><span class="pl-k">-&gt;</span>deleteMessage(<span class="pl-smi">$message</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h2>
+<a id="service-bus-topics" class="anchor" href="#service-bus-topics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Service Bus Topics</h2>
+
+<h3>
+<a id="create-a-topic" class="anchor" href="#create-a-topic" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a Topic</h3>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {   </span>
+<span class="pl-s1">  <span class="pl-c">// Create topic.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$topicInfo</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">TopicInfo</span>(<span class="pl-s"><span class="pl-pds">"</span>mytopic<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1">  <span class="pl-smi">$serviceBusRestProxy</span><span class="pl-k">-&gt;</span>createTopic(<span class="pl-smi">$topicInfo</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h3>
+<a id="create-a-subscription-with-the-default-matchall-filter" class="anchor" href="#create-a-subscription-with-the-default-matchall-filter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a subscription with the default (MatchAll) filter</h3>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Create subscription.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$subscriptionInfo</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">SubscriptionInfo</span>(<span class="pl-s"><span class="pl-pds">"</span>mysubscription<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1">  <span class="pl-smi">$serviceBusRestProxy</span><span class="pl-k">-&gt;</span>createSubscription(<span class="pl-s"><span class="pl-pds">"</span>mytopic<span class="pl-pds">"</span></span>, <span class="pl-smi">$subscriptionInfo</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h3>
+<a id="send-a-message-to-a-topic" class="anchor" href="#send-a-message-to-a-topic" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Send a message to a topic</h3>
+
+<p>Messages sent to Service Bus topics are instances of the <strong>BrokeredMessage</strong> class.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Create message.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$message</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">BrokeredMessage</span>();</span>
+<span class="pl-s1">  <span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>setBody(<span class="pl-s"><span class="pl-pds">"</span>my message<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-c">// Send message.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$serviceBusRestProxy</span><span class="pl-k">-&gt;</span>sendTopicMessage(<span class="pl-s"><span class="pl-pds">"</span>mytopic<span class="pl-pds">"</span></span>, <span class="pl-smi">$message</span>);</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h3>
+<a id="receive-a-message-from-a-topic" class="anchor" href="#receive-a-message-from-a-topic" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Receive a message from a topic</h3>
+
+<p>The primary way to receive messages from a subscription is to use a <strong>ServiceBusRestProxy-&gt;receiveSubscriptionMessage</strong> method. Received messages can work in two different modes: <strong>ReceiveAndDelete</strong> (the default) and <strong>PeekLock</strong> similarly to Service Bus Queues.</p>
+
+<p>The example below demonstrates how a message can be received and processed using <strong>ReceiveAndDelete</strong> mode (the default mode). </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">  <span class="pl-c">// Set receive mode to PeekLock (default is ReceiveAndDelete)</span></span>
+<span class="pl-s1">  <span class="pl-smi">$options</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">ReceiveMessageOptions</span>();</span>
+<span class="pl-s1">  <span class="pl-smi">$options</span><span class="pl-k">-&gt;</span>setReceiveAndDelete();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  <span class="pl-c">// Get message.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$message</span> <span class="pl-k">=</span> <span class="pl-smi">$serviceBusRestProxy</span><span class="pl-k">-&gt;</span>receiveSubscriptionMessage(<span class="pl-s"><span class="pl-pds">"</span>mytopic<span class="pl-pds">"</span></span>, </span>
+<span class="pl-s1">                                <span class="pl-s"><span class="pl-pds">"</span>mysubscription<span class="pl-pds">"</span></span>, </span>
+<span class="pl-s1">                                <span class="pl-smi">$options</span>);</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Body: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>getBody()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>MessageID: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$message</span><span class="pl-k">-&gt;</span>getMessageId()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">} <span class="pl-k">catch</span>(<span class="pl-c1">ServiceException</span> <span class="pl-smi">$e</span>){</span>
+<span class="pl-s1">  <span class="pl-smi">$code</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getCode();</span>
+<span class="pl-s1">  <span class="pl-smi">$error_message</span> <span class="pl-k">=</span> <span class="pl-smi">$e</span><span class="pl-k">-&gt;</span>getMessage();</span>
+<span class="pl-s1">  <span class="pl-c1">echo</span> <span class="pl-smi">$code</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$error_message</span><span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h2>
+<a id="service-management" class="anchor" href="#service-management" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Service Management</h2>
+
+<h3>
+<a id="set-up-certificates" class="anchor" href="#set-up-certificates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Set-up certificates</h3>
+
+<p>You  need to create two certificates, one for the server (a .cer file) and one for the client (a .pem file). To create the .pem file using <a href="http://www.openssl.org">OpenSSL</a>, execute this: </p>
+
+<p>openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem</p>
+
+<p>To create the .cer certificate, execute this: </p>
+
+<p>openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer</p>
+
+<h3>
+<a id="list-available-locations" class="anchor" href="#list-available-locations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List Available Locations</h3>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$serviceManagementRestProxy</span><span class="pl-k">-&gt;</span>listLocations();</span>
+<span class="pl-s1"><span class="pl-smi">$locations</span> <span class="pl-k">=</span> <span class="pl-smi">$result</span><span class="pl-k">-&gt;</span>getLocations();</span>
+<span class="pl-s1"><span class="pl-k">foreach</span>(<span class="pl-smi">$locations</span> <span class="pl-k">as</span> <span class="pl-smi">$location</span>){</span>
+<span class="pl-s1">      <span class="pl-c1">echo</span> <span class="pl-smi">$location</span><span class="pl-k">-&gt;</span>getName()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h3>
+<a id="create-a-storage-service" class="anchor" href="#create-a-storage-service" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a Storage Service</h3>
+
+<p>To create a storage service, you need a name for the service (between 3 and 24 lowercase characters and unique within Microsoft Azure), a label (a base-64 encoded name for the service, up to 100 characters), and either a location or an affinity group. Providing a description for the service is optional.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$name</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>mystorageservice<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$label</span> <span class="pl-k">=</span> <span class="pl-c1">base64_encode</span>(<span class="pl-smi">$name</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$options</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">CreateStorageServiceOptions</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$options</span><span class="pl-k">-&gt;</span>setLocation(<span class="pl-s"><span class="pl-pds">'</span>West US<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$serviceManagementRestProxy</span><span class="pl-k">-&gt;</span>createStorageService(<span class="pl-smi">$name</span>, <span class="pl-smi">$label</span>, <span class="pl-smi">$options</span>);</span></pre></div>
+
+<h3>
+<a id="create-a-cloud-service" class="anchor" href="#create-a-cloud-service" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a Cloud Service</h3>
+
+<p>A cloud service is also known as a hosted service (from earlier versions of Microsoft Azure).  The <strong>createHostedServices</strong> method allows you to create a new hosted service by providing a hosted service name (which must be unique in Microsoft Azure), a label (the base 64-endcoded hosted service name), and a <strong>CreateServiceOptions</strong> object which allows you to set the location <em>or</em> the affinity group for your service. </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$name</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>myhostedservice<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$label</span> <span class="pl-k">=</span> <span class="pl-c1">base64_encode</span>(<span class="pl-smi">$name</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$options</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">CreateServiceOptions</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$options</span><span class="pl-k">-&gt;</span>setLocation(<span class="pl-s"><span class="pl-pds">'</span>West US<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-c">// Instead of setLocation, you can use setAffinityGroup to set an affinity group.</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$serviceManagementRestProxy</span><span class="pl-k">-&gt;</span>createHostedService(<span class="pl-smi">$name</span>, <span class="pl-smi">$label</span>, <span class="pl-smi">$options</span>);</span></pre></div>
+
+<h3>
+<a id="create-a-deployment" class="anchor" href="#create-a-deployment" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a Deployment</h3>
+
+<p>To make a new deployment to Azure you must store the package file in a Microsoft Azure Blob Storage account under the same subscription as the hosted service to which the package is being uploaded. You can create a deployment package with the <a href="https://www.windowsazure.com/en-us/develop/php/how-to-guides/powershell-cmdlets/">Microsoft Azure PowerShell cmdlets</a>, or with the <a href="http://msdn.microsoft.com/en-us/library/windowsazure/gg432988.aspx">cspack commandline tool</a>.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$hostedServiceName</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>myhostedservice<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$deploymentName</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>v1<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$slot</span> <span class="pl-k">=</span> <span class="pl-c1">DeploymentSlot</span><span class="pl-k">::</span><span class="pl-c1">PRODUCTION</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$packageUrl</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>URL_for_.cspkg_file<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$configuration</span> <span class="pl-k">=</span> <span class="pl-c1">file_get_contents</span>(<span class="pl-s"><span class="pl-pds">'</span>path_to_.cscfg_file<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$label</span> <span class="pl-k">=</span> <span class="pl-c1">base64_encode</span>(<span class="pl-smi">$hostedServiceName</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$serviceManagementRestProxy</span><span class="pl-k">-&gt;</span>createDeployment(<span class="pl-smi">$hostedServiceName</span>,</span>
+<span class="pl-s1">                         <span class="pl-smi">$deploymentName</span>,</span>
+<span class="pl-s1">                         <span class="pl-smi">$slot</span>,</span>
+<span class="pl-s1">                         <span class="pl-smi">$packageUrl</span>,</span>
+<span class="pl-s1">                         <span class="pl-smi">$configuration</span>,</span>
+<span class="pl-s1">                         <span class="pl-smi">$label</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$status</span> <span class="pl-k">=</span> <span class="pl-smi">$serviceManagementRestProxy</span><span class="pl-k">-&gt;</span>getOperationStatus(<span class="pl-smi">$result</span>);</span>
+<span class="pl-s1"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Operation status: <span class="pl-pds">"</span></span><span class="pl-k">.</span><span class="pl-smi">$status</span><span class="pl-k">-&gt;</span>getStatus()<span class="pl-k">.</span><span class="pl-s"><span class="pl-pds">"</span>&lt;br /&gt;<span class="pl-pds">"</span></span>;</span></pre></div>
+
+<h2>
+<a id="media-services" class="anchor" href="#media-services" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Media Services</h2>
+
+<h3>
+<a id="create-new-asset-with-file" class="anchor" href="#create-new-asset-with-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create new asset with file</h3>
+
+<p>To create an asset with a file you need to create an empty asset, create access policy with write permission, create a locator joining your asset and access policy, perform actual upload and generate file info.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$asset</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Asset</span>(<span class="pl-c1">Asset</span><span class="pl-k">::</span><span class="pl-c1">OPTIONS_NONE</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$asset</span> <span class="pl-k">=</span> <span class="pl-smi">$restProxy</span><span class="pl-k">-&gt;</span>createAsset(<span class="pl-smi">$asset</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$access</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">AccessPolicy</span>(<span class="pl-s"><span class="pl-pds">'</span>[Some access policy name]<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$access</span><span class="pl-k">-&gt;</span>setDurationInMinutes([<span class="pl-c1">Munites</span> <span class="pl-c1">AccessPolicy</span> <span class="pl-c1">is</span> <span class="pl-c1">valid</span>]);</span>
+<span class="pl-s1"><span class="pl-smi">$access</span><span class="pl-k">-&gt;</span>setPermissions(<span class="pl-c1">AccessPolicy</span><span class="pl-k">::</span><span class="pl-c1">PERMISSIONS_WRITE</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$access</span> <span class="pl-k">=</span> <span class="pl-smi">$restProxy</span><span class="pl-k">-&gt;</span>createAccessPolicy(<span class="pl-smi">$access</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$sasLocator</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Locator</span>(<span class="pl-smi">$asset</span>,  <span class="pl-smi">$access</span>, <span class="pl-c1">Locator</span><span class="pl-k">::</span><span class="pl-c1">TYPE_SAS</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$sasLocator</span><span class="pl-k">-&gt;</span>setStartTime(<span class="pl-k">new</span> <span class="pl-c1">\DateTime</span>(<span class="pl-s"><span class="pl-pds">'</span>now -5 minutes<span class="pl-pds">'</span></span>));</span>
+<span class="pl-s1"><span class="pl-smi">$sasLocator</span> <span class="pl-k">=</span> <span class="pl-smi">$restProxy</span><span class="pl-k">-&gt;</span>createLocator(<span class="pl-smi">$sasLocator</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$restProxy</span><span class="pl-k">-&gt;</span>uploadAssetFile(<span class="pl-smi">$sasLocator</span>, <span class="pl-s"><span class="pl-pds">'</span>[file name]<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>[file content]<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$restProxy</span><span class="pl-k">-&gt;</span>createFileInfos(<span class="pl-smi">$asset</span>);</span></pre></div>
+
+<h3>
+<a id="encode-asset" class="anchor" href="#encode-asset" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Encode asset</h3>
+
+<p>To perform media file encoding you will need input asset ($inputAsset) with a file in it (something like in previous chapter). Also you need to create an array of task data objects and a job data object. To create a task object use a media processor, task XML body and configuration name.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$mediaProcessor</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">restProxy</span><span class="pl-k">-&gt;</span>getLatestMediaProcessor(<span class="pl-s"><span class="pl-pds">'</span>[Media processor]<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$task</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Task</span>(<span class="pl-s"><span class="pl-pds">'</span>[Task XML body]<span class="pl-pds">'</span></span>, <span class="pl-smi">$mediaProcessor</span><span class="pl-k">-&gt;</span>getId(), <span class="pl-c1">TaskOptions</span><span class="pl-k">::</span><span class="pl-c1">NONE</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$task</span><span class="pl-k">-&gt;</span>setConfiguration(<span class="pl-s"><span class="pl-pds">'</span>[Configuration name]<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$restProxy</span><span class="pl-k">-&gt;</span>createJob(<span class="pl-k">new</span> <span class="pl-c1">Job</span>(), <span class="pl-c1">array</span>(<span class="pl-smi">$inputAsset</span>), <span class="pl-c1">array</span>(<span class="pl-smi">$task</span>));</span></pre></div>
+
+<h3>
+<a id="get-public-url-to-encoded-asset" class="anchor" href="#get-public-url-to-encoded-asset" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get public URL to encoded asset</h3>
+
+<p>After you’ve uploaded a media file and encode it you can get a download URL for that file or a streaming URL for multiple bitrate files. Create a new access policy with read permission and link it with job output asset via locator.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$accessPolicy</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">AccessPolicy</span>(<span class="pl-s"><span class="pl-pds">'</span>[Some access policy name]<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$accessPolicy</span><span class="pl-k">-&gt;</span>setDurationInMinutes([<span class="pl-c1">Munites</span> <span class="pl-c1">AccessPolicy</span> <span class="pl-c1">is</span> <span class="pl-c1">valid</span>]);</span>
+<span class="pl-s1"><span class="pl-smi">$accessPolicy</span><span class="pl-k">-&gt;</span>setPermissions(<span class="pl-c1">AccessPolicy</span><span class="pl-k">::</span><span class="pl-c1">PERMISSIONS_READ</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$accessPolicy</span> <span class="pl-k">=</span> <span class="pl-smi">$restProxy</span><span class="pl-k">-&gt;</span>createAccessPolicy(<span class="pl-smi">$accessPolicy</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Download URL</span></span>
+<span class="pl-s1"><span class="pl-smi">$sasLocator</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Locator</span>(<span class="pl-smi">$asset</span>, <span class="pl-smi">$accessPolicy</span>, <span class="pl-c1">Locator</span><span class="pl-k">::</span><span class="pl-c1">TYPE_SAS</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$sasLocator</span><span class="pl-k">-&gt;</span>setStartTime(<span class="pl-k">new</span> <span class="pl-c1">\DateTime</span>(<span class="pl-s"><span class="pl-pds">'</span>now -5 minutes<span class="pl-pds">'</span></span>));</span>
+<span class="pl-s1"><span class="pl-smi">$sasLocator</span> <span class="pl-k">=</span> <span class="pl-smi">$restProxy</span><span class="pl-k">-&gt;</span>createLocator(<span class="pl-smi">$sasLocator</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Azure needs time to publish media</span></span>
+<span class="pl-s1"><span class="pl-c1">sleep</span>(<span class="pl-c1">30</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$downloadUrl</span> <span class="pl-k">=</span> <span class="pl-smi">$sasLocator</span><span class="pl-k">-&gt;</span>getBaseUri() <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>[File name]<span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$sasLocator</span><span class="pl-k">-&gt;</span>getContentAccessComponent()</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Streaming URL</span></span>
+<span class="pl-s1"><span class="pl-smi">$originLocator</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Locator</span>(<span class="pl-smi">$asset</span>, <span class="pl-smi">$accessPolicy</span>, <span class="pl-c1">Locator</span><span class="pl-k">::</span><span class="pl-c1">TYPE_ON_DEMAND_ORIGIN</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$originLocator</span> <span class="pl-k">=</span> <span class="pl-smi">$restProxy</span><span class="pl-k">-&gt;</span>createLocator(<span class="pl-smi">$originLocator</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Azure needs time to publish media</span></span>
+<span class="pl-s1"><span class="pl-c1">sleep</span>(<span class="pl-c1">30</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$streamingUrl</span> <span class="pl-k">=</span> <span class="pl-smi">$originLocator</span><span class="pl-k">-&gt;</span>getPath() <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>[Manifest file name]<span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">"</span>/manifest<span class="pl-pds">"</span></span>;</span></pre></div>
+
+<h3>
+<a id="manage-media-services-entities" class="anchor" href="#manage-media-services-entities" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Manage media services entities</h3>
+
+<p>Media services CRUD operations are performed through media services rest proxy class. It has methods like “createAsset”, “createLocator”, “createJob” and etc. for entities creations. </p>
+
+<p>To retrieve all entities list you may use methods “getAssetList”, “getAccessPolicyList”, “getLocatorList”, “getJobList” and etc. For getting single entity data use methods “getAsset”, “getJob”, “getTask” and etc. passing the entity identifier or entity data model object with non-empty identifier as a parameter. </p>
+
+<p>Update entities with methods like “updateLocator”, “updateAsset”, “updateAssetFile” and etc. passing the entity data model object as a parameter. It is important to have valid entity identifier specified in data model object. </p>
+
+<p>Erase entities with methods like “deleteAsset”, “deleteAccessPolicy”, “deleteJob” and etc. passing the entity identifier or entity data model object with non-empty identifier as a parameter.</p>
+
+<p>Also you could get linked entities with methods “getAssetLocators”, “getAssetParentAssets”, “getAssetStorageAccount”, “getLocatorAccessPolicy”, “getJobTasks” and etc. passing the entity identifier or entity data model object with non-empty identifier as a parameter.</p>
+
+<p>The complete list of all methods available you could find in <a href="src/MediaServices/Internal/IMediaServices.php">IMediaServices</a> interface.</p>
+
+<p><strong>For more examples please see the <a href="http://www.windowsazure.com/en-us/develop/php">Microsoft Azure PHP Developer Center</a></strong></p>
+
+<h1>
+<a id="need-help" class="anchor" href="#need-help" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Need Help?</h1>
+
+<p>Be sure to check out the Microsoft Azure <a href="http://go.microsoft.com/fwlink/?LinkId=234489">Developer Forums on Stack Overflow</a> if you have trouble with the provided code.</p>
+
+<h1>
+<a id="contribute-code-or-provide-feedback" class="anchor" href="#contribute-code-or-provide-feedback" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contribute Code or Provide Feedback</h1>
+
+<p>If you would like to become an active contributor to this project please follow the instructions provided in <a href="http://windowsazure.github.com/guidelines.html">Microsoft Azure Projects Contribution Guidelines</a>.</p>
+
+<p>To setup your development environment, follow the instructions in this <a href="https://github.com/Azure/azure-sdk-for-php/wiki/Devbox-installation-guide">wiki page</a>.</p>
+
+<p>If you encounter any bugs with the library please file an issue in the <a href="https://github.com/Azure/azure-sdk-for-php/issues">Issues</a> section of the project.</p>
+
+<h1>
+<a id="learn-more" class="anchor" href="#learn-more" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Learn More</h1>
+
+<p><a href="http://www.windowsazure.com/en-us/develop/php/">Microsoft Azure PHP Developer Center</a></p>
+
+<p>This project has adopted the <a href="https://opensource.microsoft.com/codeofconduct/">Microsoft Open Source Code of Conduct</a>. For more information see the <a href="https://opensource.microsoft.com/codeofconduct/faq/">Code of Conduct FAQ</a> or
+contact <a href="mailto:opencode@microsoft.com">opencode@microsoft.com</a> with any additional questions or comments.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/YOTOV-LIMITED/azure-sdk-for-php">Azure-sdk-for-php</a> is maintained by <a href="https://github.com/YOTOV-LIMITED">YOTOV-LIMITED</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
